@@ -1,12 +1,6 @@
 #!/bin/bash
-#
-# Convert all midi files in folder to csv
-#
 
-# run
-# `sh midi-t-csv.sh <input file path>`
 
-# Check for missing parameters
 if [ $# -lt 1 ]; then
   echo 1>&2 "$0: Error: input path missing"
   exit 2

@@ -50,7 +50,7 @@ async function main() {
 
     return newRow;
   });
-  console.log(recordsWithCleanedOffset);
+  // console.log(recordsWithCleanedOffset);
 
   // Convert data to csv-string
   const recordsAsString = recordsWithCleanedOffset.reduce((acc, row) => {
@@ -70,7 +70,7 @@ async function main() {
 
   newFileNamePath = newFileNamePath.join('/'); // .replace('.csv', '_new.csv');
 
-  console.log('outPath:', outPath, newFileNamePath);
+  // console.log('outPath:', outPath, newFileNamePath);
 
   if (!existsSync(outPath)) {
     await fs.mkdir(outPath);
@@ -78,10 +78,11 @@ async function main() {
 
   // Write new csv
   await writeFile(`${newFileNamePath}`, recordsAsString, 'utf8');
-  console.log('Wrote file:', newFileNamePath);
+  // console.log('Wrote file:', newFileNamePath);
 
   // Remove input-csv-file
   await rm(filePath);
+  console.log(newFileNamePath);
 }
 
 main();
