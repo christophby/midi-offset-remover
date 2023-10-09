@@ -5,7 +5,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "start": "sh midi-t-csv.sh ./PUT_FILES_HERE",
+    "start": "sh midi-offset-remove-all.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

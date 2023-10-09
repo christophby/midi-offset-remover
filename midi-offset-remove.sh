@@ -28,14 +28,12 @@ generatedCsvFilePath=$(node "$script_dir/index.js" "${outfileFileCsvName}")
 #
 # Convert csv to midi
 #
-#for csvFile in ${input_file_path}/out/*.csv ;
-#do
-    csvFile=$generatedCsvFilePath
-    outfileFileName=${csvFile//.csv/.mid} # replace .csv with .mid
-    csvmidipy "${csvFile}" "${outfileFileName}"
+csvFile=$generatedCsvFilePath
+outfileFileName=${csvFile//.csv/.mid} # replace .csv with .mid
+csvmidipy "${csvFile}" "${outfileFileName}"
 
-    echo "Wrote: ${outfileFileName}"
-    // Remove temp generated csv files
-    rm "${csvFile}"
-#done
+echo "Wrote: ${outfileFileName}"
+// Remove temp generated csv files
+rm "${csvFile}"
+
 
