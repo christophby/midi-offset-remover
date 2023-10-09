@@ -49,7 +49,6 @@ async function main() {
 
     return newRow;
   });
-  // console.log(recordsWithCleanedOffset);
 
   // Convert data to csv-string
   const recordsAsString = recordsWithCleanedOffset.reduce((acc, row) => {
