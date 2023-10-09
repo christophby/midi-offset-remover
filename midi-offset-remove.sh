@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Convert one midi file to csv
+# Convert one midi file to csv, removes offset, converts csv back to midi
 #
 
 # run
@@ -18,21 +18,19 @@ midiFile="${1}"
 outfileFileCsvName=${midiFile//.mid/.csv} # replace .mid with .csv
 echo "File: ${outfileFileCsvName}"
 
-midicsvpy "${midiFile}" "${outfileFileCsvName}" # conversion to csv
+# conversion midi to csv
+midicsvpy "${midiFile}" "${outfileFileCsvName}"
 
-# node script makes midi modification and creates new csv
+# node script does midi modification and creates new csv
 generatedCsvFilePath=$(node "$script_dir/index.js" "${outfileFileCsvName}")
-# node "$script_dir/index.js" "${outfileFileCsvName}"
 
-
-#
-# Convert csv to midi
-#
+# conversion csv to midi
 csvFile=$generatedCsvFilePath
 outfileFileName=${csvFile//.csv/.mid} # replace .csv with .mid
 csvmidipy "${csvFile}" "${outfileFileName}"
 
 echo "Wrote: ${outfileFileName}"
+
 // Remove temp generated csv files
 rm "${csvFile}"
 

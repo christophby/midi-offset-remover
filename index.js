@@ -10,6 +10,7 @@ async function main() {
   // Read csv
   const filePath = process.argv[2];
   const content = await fs.readFile(`${filePath}`);
+
   // Parse csv
   const records = parse(content, {
     bom: true,
@@ -22,9 +23,8 @@ async function main() {
   const recordsAsArray = await records.toArray();
 
   /*
-        Modify rows aka midi
-    */
-  // let firstCommandRow = null;
+    Modify rows aka midi
+  */
   let firstCommandRowTimeOffset = null;
 
   const recordsWithCleanedOffset = recordsAsArray.map((row) => {
@@ -40,7 +40,6 @@ async function main() {
       timeEntry > 100 &&
       typeEntry !== 'End_track'
     ) {
-      // firstCommandRow = row;
       firstCommandRowTimeOffset = timeEntry;
     }
 
@@ -68,9 +67,7 @@ async function main() {
   outPath.pop();
   outPath = outPath.join('/');
 
-  newFileNamePath = newFileNamePath.join('/'); // .replace('.csv', '_new.csv');
-
-  // console.log('outPath:', outPath, newFileNamePath);
+  newFileNamePath = newFileNamePath.join('/');
 
   if (!existsSync(outPath)) {
     await fs.mkdir(outPath);
@@ -78,10 +75,12 @@ async function main() {
 
   // Write new csv
   await writeFile(`${newFileNamePath}`, recordsAsString, 'utf8');
-  // console.log('Wrote file:', newFileNamePath);
 
   // Remove input-csv-file
   await rm(filePath);
+
+  // IMPORTANT: Only this console.log is allowed. It's return will be used by the bash script
+  // eslint-disable-next-line no-console
   console.log(newFileNamePath);
 }
 
